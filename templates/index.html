@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<style>
+.alert {
+   background-color:red
+}
+</style>
+</head>
+<body>
+<script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Flask API 호출하여 app.py에서 확인한 클래스 존재 여부 확인
+            fetch('/api/check-status')
+                .then(response => response.json())
+                .then(data => {
+                    // URL 상태를 확인하여 .alert 클래스를 추가
+                    const urls = ['site_name'];
+                    urls.forEach(id => {
+                        if (data[id]) {
+                            document.getElementById(id).classList.add('alert');
+                        }
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+function refreshPage() {
+            setTimeout(function() {
+                location.reload(); // 페이지를 새로고침.
+            }, 5000); // 5초 후에 스크립트 실행
+        }
+
+        window.onload = function() {
+            refreshPage();
+        };
+    </script>
+</body>
+</html>
