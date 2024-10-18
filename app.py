@@ -32,7 +32,7 @@ def check_alerts_border():
         'site_name_1': 'site_url_1',
 
     }
-    class_name = 'good-border'
+    class_name = 'target_status'
     results = {key: not check_class_in_page(url, class_name) for key, url in urls.items()}
     return jsonify(results)
 
